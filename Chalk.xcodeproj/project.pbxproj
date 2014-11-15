@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA6E8DF51A177C24006A7FCB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E8DF41A177C24006A7FCB /* Shape.swift */; };
 		FA72F8E41A176373005F0DC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72F8E31A176373005F0DC7 /* AppDelegate.swift */; };
 		FA72F8E61A176373005F0DC7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72F8E51A176373005F0DC7 /* ViewController.swift */; };
 		FA72F8E91A176373005F0DC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA72F8E71A176373005F0DC7 /* Main.storyboard */; };
 		FA72F8EB1A176373005F0DC7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA72F8EA1A176373005F0DC7 /* Images.xcassets */; };
 		FA72F8EE1A176373005F0DC7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA72F8EC1A176373005F0DC7 /* LaunchScreen.xib */; };
 		FA72F8FA1A176373005F0DC7 /* ChalkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72F8F91A176373005F0DC7 /* ChalkTests.swift */; };
+		FA72F9061A1769E6005F0DC7 /* WhiteboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72F9051A1769E6005F0DC7 /* WhiteboardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA6E8DF41A177C24006A7FCB /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		FA72F8DE1A176373005F0DC7 /* Chalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA72F8E21A176373005F0DC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA72F8E31A176373005F0DC7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		FA72F8F31A176373005F0DC7 /* ChalkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChalkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA72F8F81A176373005F0DC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA72F8F91A176373005F0DC7 /* ChalkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChalkTests.swift; sourceTree = "<group>"; };
+		FA72F9051A1769E6005F0DC7 /* WhiteboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WhiteboardView.swift; path = Whiteboard/WhiteboardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		FA72F8E01A176373005F0DC7 /* Chalk */ = {
 			isa = PBXGroup;
 			children = (
+				FA72F9041A1769AD005F0DC7 /* Whiteboard */,
 				FA72F8E31A176373005F0DC7 /* AppDelegate.swift */,
 				FA72F8E51A176373005F0DC7 /* ViewController.swift */,
 				FA72F8E71A176373005F0DC7 /* Main.storyboard */,
@@ -110,6 +115,15 @@
 				FA72F8F81A176373005F0DC7 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FA72F9041A1769AD005F0DC7 /* Whiteboard */ = {
+			isa = PBXGroup;
+			children = (
+				FA72F9051A1769E6005F0DC7 /* WhiteboardView.swift */,
+				FA6E8DF41A177C24006A7FCB /* Shape.swift */,
+			);
+			name = Whiteboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +228,8 @@
 			files = (
 				FA72F8E61A176373005F0DC7 /* ViewController.swift in Sources */,
 				FA72F8E41A176373005F0DC7 /* AppDelegate.swift in Sources */,
+				FA72F9061A1769E6005F0DC7 /* WhiteboardView.swift in Sources */,
+				FA6E8DF51A177C24006A7FCB /* Shape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
