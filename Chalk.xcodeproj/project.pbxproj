@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EDF4F65E1A177EAF00D56CEF /* ChalkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4F65C1A177EAF00D56CEF /* ChalkSession.swift */; };
+		EDF4F65F1A177EAF00D56CEF /* ChalkSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF4F65D1A177EAF00D56CEF /* ChalkSessionDelegate.swift */; };
 		FA6E8DF51A177C24006A7FCB /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6E8DF41A177C24006A7FCB /* Shape.swift */; };
 		FA72F8E41A176373005F0DC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72F8E31A176373005F0DC7 /* AppDelegate.swift */; };
 		FA72F8E61A176373005F0DC7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA72F8E51A176373005F0DC7 /* ViewController.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EDF4F65C1A177EAF00D56CEF /* ChalkSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChalkSession.swift; sourceTree = "<group>"; };
+		EDF4F65D1A177EAF00D56CEF /* ChalkSessionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChalkSessionDelegate.swift; sourceTree = "<group>"; };
 		FA6E8DF41A177C24006A7FCB /* Shape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		FA72F8DE1A176373005F0DC7 /* Chalk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chalk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA72F8E21A176373005F0DC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +64,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EDF4F6601A177EB700D56CEF /* network */ = {
+			isa = PBXGroup;
+			children = (
+				EDF4F65C1A177EAF00D56CEF /* ChalkSession.swift */,
+				EDF4F65D1A177EAF00D56CEF /* ChalkSessionDelegate.swift */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
 		FA72F8D51A176373005F0DC7 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +94,7 @@
 		FA72F8E01A176373005F0DC7 /* Chalk */ = {
 			isa = PBXGroup;
 			children = (
+				EDF4F6601A177EB700D56CEF /* network */,
 				FA72F9041A1769AD005F0DC7 /* Whiteboard */,
 				FA72F8E31A176373005F0DC7 /* AppDelegate.swift */,
 				FA72F8E51A176373005F0DC7 /* ViewController.swift */,
@@ -227,8 +241,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA72F8E61A176373005F0DC7 /* ViewController.swift in Sources */,
+				EDF4F65F1A177EAF00D56CEF /* ChalkSessionDelegate.swift in Sources */,
 				FA72F8E41A176373005F0DC7 /* AppDelegate.swift in Sources */,
 				FA72F9061A1769E6005F0DC7 /* WhiteboardView.swift in Sources */,
+				EDF4F65E1A177EAF00D56CEF /* ChalkSession.swift in Sources */,
 				FA6E8DF51A177C24006A7FCB /* Shape.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
