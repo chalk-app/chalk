@@ -16,6 +16,8 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     var username = "ChalkUser"
     
     @IBOutlet weak var usernameField: UITextField?
+    @IBOutlet weak var whiteboardView: WhiteboardView?
+    var whiteboardViewDelegate = WhiteboardShapeDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,10 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
 
     func presentWhiteboard()
     {
+        self.usernameField?.hidden = true
+        self.whiteboardView?.hidden = false;
+        self.whiteboardView?.delegate = self.whiteboardViewDelegate
     }
-    
     
     func browseForDevices()
     {
