@@ -31,8 +31,8 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     func browseForDevices()
     {
         self.session.browser.delegate = self
+        self.session.start()
         self.presentViewController(session.browser, animated: true) { () -> Void in
-            self.session.start()
         }
     }
     
@@ -41,19 +41,18 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     {
         session.browser .dismissViewControllerAnimated(true) { () -> Void in
             self.session.stop()
+            self.session.browser.delegate = nil
         }
-        session.browser.delegate = nil
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!)
     {
         session.browser .dismissViewControllerAnimated(true) { () -> Void in
-            
+            self.session.stop()
+            self.session.browser.delegate = nil
         }
-        session.browser.delegate = nil
     }
-    
-    
+        
     func peerDidConnect(peerID: MCPeerID)
     {
     }
