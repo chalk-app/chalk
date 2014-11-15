@@ -48,6 +48,7 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
         
     func peerDidConnect(peerID: MCPeerID)
     {
+        
     }
     
     func peerWillDisconnect(peerID: MCPeerID)

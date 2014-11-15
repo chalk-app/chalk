@@ -13,7 +13,7 @@ class ChalkSession: NSObject, MCSessionDelegate {
     
     var peers : [MCPeerID]
     let delegate: ChalkSessionDelegate
-    let serviceType = "LCOC-ChalkSession"
+    let serviceType = "ChalkSession"
     var session : MCSession!
     
     init(delegate: ChalkSessionDelegate)
