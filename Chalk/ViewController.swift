@@ -19,11 +19,6 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     @IBOutlet weak var whiteboardView: WhiteboardView?
     var whiteboardViewDelegate = WhiteboardShapeDelegate()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.session = ChalkSession(username: self.username, delegate: self)
-    }
-    
     override func viewDidAppear(animated: Bool) {
         usernameField?.becomeFirstResponder()
     }
@@ -80,10 +75,10 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
         return false
     }
 
-    
     func textFieldDidEndEditing(textField: UITextField)
     {
         self.username = textField.text
+        self.session = ChalkSession(username: self.username, delegate: self)
         self.browseForDevices()
     }
 

@@ -34,7 +34,8 @@ class ChalkSession: NSObject, MCSessionDelegate {
     {
         if let runnningAdvertiser = self.advertiser{
         }else{
-            let mcAdvertiser = MCAdvertiserAssistant(serviceType:self.serviceType, discoveryInfo: [NSObject : AnyObject](), session: self.session)
+            let mcAdvertiser = MCAdvertiserAssistant(serviceType:self.serviceType
+                , discoveryInfo: [NSObject : AnyObject](), session: self.session)
             mcAdvertiser.start()
             self.advertiser = mcAdvertiser
         }
