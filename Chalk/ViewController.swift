@@ -13,6 +13,8 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
 
     var session : ChalkSession!
     
+    @IBOutlet weak var instruction: UITextField?
+    
     func username() -> String
     {
         return "ChalkUser"
@@ -37,12 +39,18 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
     {
+        session.browser .dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
         session.browser.delegate = nil
-        
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!)
     {
+        session.browser .dismissViewControllerAnimated(true) { () -> Void in
+            
+        }
+        session.browser.delegate = nil
     }
     
     
