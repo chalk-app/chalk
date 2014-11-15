@@ -9,25 +9,27 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewControllerDelegate {
+class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewControllerDelegate, UITextFieldDelegate {
 
     var session : ChalkSession!
     
-    @IBOutlet weak var instruction: UITextField?
+    var username = "ChalkUser"
     
-    func username() -> String
-    {
-        return "ChalkUser"
-    }
+    @IBOutlet weak var usernameField: UITextField?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.session = ChalkSession(username: self.username(), delegate: self)
+        self.session = ChalkSession(username: self.username, delegate: self)
     }
     
     override func viewDidAppear(animated: Bool) {
-        browseForDevices()
+        usernameField?.becomeFirstResponder()
     }
+
+    func presentWhiteboard()
+    {
+    }
+    
     
     func browseForDevices()
     {
@@ -66,6 +68,13 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     func didReceiveData(NSData,from: MCPeerID)
     {
     }
+    
+    func textFieldDidEndEditing(textField: UITextField)
+    {
+        self.username = textField.text
+        self.browseForDevices()
+    }
+
     
 }
 
