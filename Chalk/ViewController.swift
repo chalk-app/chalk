@@ -33,8 +33,9 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     
     func browseForDevices()
     {
-        session.browser.delegate = self
+        self.session.browser.delegate = self
         self.presentViewController(session.browser, animated: true) { () -> Void in
+            self.session.start()
         }
     }
     
@@ -42,7 +43,7 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
     {
         session.browser .dismissViewControllerAnimated(true) { () -> Void in
-            
+            self.session.stop()
         }
         session.browser.delegate = nil
     }
