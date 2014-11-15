@@ -66,13 +66,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EDF4F6601A177EB700D56CEF /* network */ = {
+		EDF4F6601A177EB700D56CEF /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				EDF4F65C1A177EAF00D56CEF /* ChalkSession.swift */,
 				EDF4F65D1A177EAF00D56CEF /* ChalkSessionDelegate.swift */,
 			);
-			name = network;
+			name = Network;
 			sourceTree = "<group>";
 		};
 		FA72F8D51A176373005F0DC7 = {
@@ -96,7 +96,7 @@
 		FA72F8E01A176373005F0DC7 /* Chalk */ = {
 			isa = PBXGroup;
 			children = (
-				EDF4F6601A177EB700D56CEF /* network */,
+				EDF4F6601A177EB700D56CEF /* Network */,
 				FA72F9041A1769AD005F0DC7 /* Whiteboard */,
 				FA72F8E31A176373005F0DC7 /* AppDelegate.swift */,
 				FA72F8E51A176373005F0DC7 /* ViewController.swift */,
