@@ -78,7 +78,7 @@ class WhiteboardView: UIView {
         let touch = touches.anyObject() as UITouch?
         let location: CGPoint! = touch?.locationInView(self)
 
-        // TODO: we may want to skip some location
+        // TODO: we may want to skip some locations
         self.currentShape?.points.append(location)
     }
 
