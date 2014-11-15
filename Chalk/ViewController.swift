@@ -13,8 +13,6 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
 
     var session : ChalkSession!
     
-    var username = "ChalkUser"
-    
     @IBOutlet weak var usernameField: UITextField?
     @IBOutlet weak var whiteboardView: WhiteboardView?
     var whiteboardViewDelegate = WhiteboardShapeDelegate()
@@ -77,8 +75,7 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
 
     func textFieldDidEndEditing(textField: UITextField)
     {
-        self.username = textField.text
-        self.session = ChalkSession(username: self.username, delegate: self)
+        self.session = ChalkSession(username: textField.text, delegate: self)
         self.browseForDevices()
     }
 
