@@ -72,12 +72,11 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
         self.shouldBrowse = !browserSwitch!.on
         let browser = session!.browse()
         browser.delegate = self
+        self.spinner!.startAnimating()
+        let advertiser = session!.advertise()
         if( shouldBrowse){
             self.presentViewController(browser, animated: true) { () -> Void in
             }
-        }else{
-            self.spinner!.startAnimating()
-            let advertiser = session!.advertise()
         }
     }
     
