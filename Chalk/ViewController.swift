@@ -33,7 +33,6 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
         self.whiteboardView?.delegate = self.whiteboardViewDelegate
     }
     
-    
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
     {
         browserViewController.dismissViewControllerAnimated(true) { () -> Void in
