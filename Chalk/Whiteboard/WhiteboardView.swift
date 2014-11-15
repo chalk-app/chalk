@@ -48,15 +48,16 @@ class WhiteboardView: UIView {
 
     func drawShape(shape: Shape) {
         let first = shape.points[0]
-        let rest = shape.points[1 ... shape.points.count]
+        let rest = shape.points[1 ..< shape.points.count]
 
         let ctx = UIGraphicsGetCurrentContext()
+        CGContextSetLineWidth(ctx, CGFloat(shape.width))
         CGContextSetStrokeColorWithColor(ctx, shape.strokeColor)
         CGContextMoveToPoint(ctx, first.x, first.y)
         for p in rest {
             CGContextAddLineToPoint(ctx, p.x, p.y)
         }
-        CGContextClosePath(ctx)
+        CGContextStrokePath(ctx)
     }
 
     override func drawRect(rect: CGRect) {
@@ -77,6 +78,8 @@ class WhiteboardView: UIView {
     override func touchesMoved(touches: NSSet, withEvent event: UIEvent) {
         let touch = touches.anyObject() as UITouch?
         let location: CGPoint! = touch?.locationInView(self)
+
+        // TODO: we need to draw current shape
 
         // TODO: we may want to skip some locations
         self.currentShape?.points.append(location)
