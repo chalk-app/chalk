@@ -68,11 +68,11 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     func textFieldDidEndEditing(textField: UITextField)
     {
         textField.alpha = 0.4
-        self.session = ChalkSession(username: textField.text, delegate: self)
+        self.session = ChalkSession(delegate: self)
         self.shouldBrowse = !browserSwitch!.on
+        let browser = session!.browse()
+        browser.delegate = self
         if( shouldBrowse){
-            let browser = session!.browse()
-            browser.delegate = self
             self.presentViewController(browser, animated: true) { () -> Void in
             }
         }else{

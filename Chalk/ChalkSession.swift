@@ -14,21 +14,18 @@ class ChalkSession: NSObject, MCSessionDelegate {
     var peers : [MCPeerID]
     let delegate: ChalkSessionDelegate
     let serviceType = "ChalkSession"
-    let username : String
     var session : MCSession?
     
-    init(username: String,delegate: ChalkSessionDelegate)
+    init(delegate: ChalkSessionDelegate)
     {
-        self.username = username
         self.delegate = delegate
         self.peers = []
         super.init()
-        self
     }
 
     func browse() -> MCBrowserViewController
     {
-        let peerID =  MCPeerID(displayName: username)
+        let peerID =  MCPeerID(displayName: UIDevice.currentDevice().name )
         session = MCSession(peer: peerID)
         session!.delegate = self
         let browser = MCBrowserViewController(serviceType: self.serviceType, session: session)
@@ -37,11 +34,8 @@ class ChalkSession: NSObject, MCSessionDelegate {
     
     func advertise() -> MCAdvertiserAssistant
     {
-        let peerID =  MCPeerID(displayName: username)
-        session = MCSession(peer: peerID)
-        session!.delegate = self
         let advertiser = MCAdvertiserAssistant(serviceType:self.serviceType
-                , discoveryInfo: [NSObject : AnyObject](), session: session)
+                , discoveryInfo:nil, session: session)
         advertiser.start()
         return advertiser
     }
