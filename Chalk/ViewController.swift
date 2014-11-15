@@ -69,6 +69,13 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     {
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return false
+    }
+
+    
     func textFieldDidEndEditing(textField: UITextField)
     {
         self.username = textField.text
