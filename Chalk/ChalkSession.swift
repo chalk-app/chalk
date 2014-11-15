@@ -15,7 +15,8 @@ class ChalkSession: NSObject, MCSessionDelegate {
     let session: MCSession
     var peers : [MCPeerID]
     let delegate: ChalkSessionDelegate
-    var advertiser : MCAdvertiserAssistant?
+    var advertiser : MCAdvertiserAssistant!
+    var browser : MCBrowserViewController!
     
     init(username: String,delegate: ChalkSessionDelegate)
     {
@@ -25,13 +26,9 @@ class ChalkSession: NSObject, MCSessionDelegate {
         self.peers = []
         super.init()
         self.session.delegate = self
+        self.browser = MCBrowserViewController(serviceType:"chat-files", session: self.session)
     }
     
-    func openBrowser(){
-        let browser = MCBrowserViewController(serviceType:"chat-files", session: self.session)
-
-    }
-
     func start()
     {
         if let runnningAdvertiser = self.advertiser{
