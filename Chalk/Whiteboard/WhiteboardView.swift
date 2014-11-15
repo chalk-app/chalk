@@ -37,11 +37,14 @@ class WhiteboardView: UIView {
     }
 
     func drawShapes() {
-        if let count = self.delegate?.numberOfShapes(self) {
+        if let count = self.delegate?.numberOfShapes(self){
             for i in 0 ..< count {
                 if let shape = self.delegate?.shapeAt(self, index: i) {
                     self.drawShape(shape)
                 }
+            }
+            if let currentShape = self.currentShape {
+                self.drawShape(currentShape)
             }
         }
     }
@@ -79,10 +82,11 @@ class WhiteboardView: UIView {
         let touch = touches.anyObject() as UITouch?
         let location: CGPoint! = touch?.locationInView(self)
 
-        // TODO: we need to draw current shape
-
-        // TODO: we may want to skip some locations
+        // TODO: we may want to skip some locations (?)
         self.currentShape?.points.append(location)
+
+        // we need to draw current shape
+        self.setNeedsDisplay()
     }
 
     override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
