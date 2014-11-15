@@ -11,14 +11,19 @@ import MultipeerConnectivity
 
 class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewControllerDelegate, UITextFieldDelegate {
 
-    var session : ChalkSession!
-    
     @IBOutlet weak var usernameField: UITextField?
     @IBOutlet weak var whiteboardView: WhiteboardView?
+    @IBOutlet weak var spinner: UIActivityIndicatorView?
+    @IBOutlet weak var browserSwitch : UISwitch?
+    
     var whiteboardViewDelegate = WhiteboardShapeDelegate()
+    var session : ChalkSession?
+    var shouldBrowse : Bool = false
     
     override func viewDidAppear(animated: Bool) {
         usernameField?.becomeFirstResponder()
+        self.spinner!.stopAnimating()
+        self.usernameField!.alpha = 1.0
     }
 
     func presentWhiteboard()
@@ -28,28 +33,16 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
         self.whiteboardView?.delegate = self.whiteboardViewDelegate
     }
     
-    func browseForDevices()
-    {
-        self.session.browser.delegate = self
-        self.session.start()
-        self.presentViewController(session.browser, animated: true) { () -> Void in
-        }
-    }
-    
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
     {
-        session.browser .dismissViewControllerAnimated(true) { () -> Void in
-            self.session.stop()
-            self.session.browser.delegate = nil
+        browserViewController.dismissViewControllerAnimated(true) { () -> Void in
         }
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!)
     {
-        session.browser .dismissViewControllerAnimated(true) { () -> Void in
-            self.session.stop()
-            self.session.browser.delegate = nil
+        browserViewController.dismissViewControllerAnimated(true) { () -> Void in
         }
     }
         
@@ -74,10 +67,19 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
 
     func textFieldDidEndEditing(textField: UITextField)
     {
+        textField.alpha = 0.4
         self.session = ChalkSession(username: textField.text, delegate: self)
-        self.browseForDevices()
+        self.shouldBrowse = !browserSwitch!.on
+        if( shouldBrowse){
+            let browser = session!.browse()
+            browser.delegate = self
+            self.presentViewController(browser, animated: true) { () -> Void in
+            }
+        }else{
+            self.spinner!.startAnimating()
+            let advertiser = session!.advertise()
+        }
     }
-
     
 }
 

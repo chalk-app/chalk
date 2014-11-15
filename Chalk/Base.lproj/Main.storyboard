@@ -16,40 +16,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V50-EG-Uba" customClass="WhiteboardView" customModule="Chalk" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V50-EG-Uba" customClass="WhiteboardView" customModule="Chalk" customModuleProvider="target">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type your name to start Chalk" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xvt-it-27y">
-                                <rect key="frame" x="106" y="270" width="388" height="60"/>
+                                <rect key="frame" x="75" y="255" width="450" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="O9o-4w-6md"/>
-                                    <constraint firstAttribute="width" constant="388" id="lLf-Xw-c04"/>
+                                    <constraint firstAttribute="width" constant="450" id="C1U-Kv-elG"/>
+                                    <constraint firstAttribute="height" constant="90" id="U3a-kn-fvU"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="A8w-64-Ffq"/>
                                 </connections>
                             </textField>
+                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Phg-Y1-ICc">
+                                <rect key="frame" x="528" y="281" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Browse" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOX-ue-1GS">
+                                <rect key="frame" x="193" y="206" width="71" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R4N-8X-Gg2">
+                                <rect key="frame" x="265" y="202" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Advertise" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqy-Mv-rli">
+                                <rect key="frame" x="322" y="206" width="85" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="V50-EG-Uba" secondAttribute="bottom" id="8s7-Uy-dJ9"/>
-                            <constraint firstItem="V50-EG-Uba" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ReO-ze-BAX"/>
-                            <constraint firstAttribute="centerX" secondItem="Xvt-it-27y" secondAttribute="centerX" id="RhI-i7-1VR"/>
-                            <constraint firstAttribute="centerY" secondItem="Xvt-it-27y" secondAttribute="centerY" id="UHb-S4-PKS"/>
-                            <constraint firstAttribute="trailing" secondItem="V50-EG-Uba" secondAttribute="trailing" id="h4C-Ne-BMe"/>
-                            <constraint firstItem="V50-EG-Uba" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="sea-ei-yjX"/>
+                            <constraint firstAttribute="centerY" secondItem="Xvt-it-27y" secondAttribute="centerY" id="ZxN-hf-YRi"/>
+                            <constraint firstAttribute="centerX" secondItem="Xvt-it-27y" secondAttribute="centerX" id="wG5-PO-Fhf"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="browserSwitch" destination="R4N-8X-Gg2" id="Y35-xj-qPz"/>
+                        <outlet property="spinner" destination="Phg-Y1-ICc" id="M6a-CG-lqA"/>
                         <outlet property="usernameField" destination="Xvt-it-27y" id="npr-Lz-DYr"/>
                         <outlet property="whiteboardView" destination="V50-EG-Uba" id="RJu-lp-hBa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="377" y="331"/>
         </scene>
     </scenes>
 </document>

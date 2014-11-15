@@ -11,42 +11,39 @@ import MultipeerConnectivity
 
 class ChalkSession: NSObject, MCSessionDelegate {
     
-    let peerID: MCPeerID
-    let session: MCSession
     var peers : [MCPeerID]
     let delegate: ChalkSessionDelegate
-    var advertiser : MCAdvertiserAssistant!
-    var browser : MCBrowserViewController!
     let serviceType = "ChalkSession"
+    let username : String
+    var session : MCSession?
     
     init(username: String,delegate: ChalkSessionDelegate)
     {
+        self.username = username
         self.delegate = delegate
-        self.peerID = MCPeerID(displayName: username)
-        self.session = MCSession(peer: self.peerID)
         self.peers = []
         super.init()
-        self.session.delegate = self
-        self.browser = MCBrowserViewController(serviceType:self.serviceType, session: self.session)
+        self
+    }
+
+    func browse() -> MCBrowserViewController
+    {
+        let peerID =  MCPeerID(displayName: username)
+        session = MCSession(peer: peerID)
+        session!.delegate = self
+        let browser = MCBrowserViewController(serviceType: self.serviceType, session: session)
+        return browser
     }
     
-    func start()
+    func advertise() -> MCAdvertiserAssistant
     {
-        if let runnningAdvertiser = self.advertiser{
-        }else{
-            let mcAdvertiser = MCAdvertiserAssistant(serviceType:self.serviceType
-                , discoveryInfo: [NSObject : AnyObject](), session: self.session)
-            mcAdvertiser.start()
-            self.advertiser = mcAdvertiser
-        }
-    }
-    
-    func stop()
-    {
-        if let runnningAdvertiser = self.advertiser{
-            runnningAdvertiser.stop()
-            self.advertiser = nil
-        }
+        let peerID =  MCPeerID(displayName: username)
+        session = MCSession(peer: peerID)
+        session!.delegate = self
+        let advertiser = MCAdvertiserAssistant(serviceType:self.serviceType
+                , discoveryInfo: [NSObject : AnyObject](), session: session)
+        advertiser.start()
+        return advertiser
     }
     
     func session(session: MCSession!, peer peerID: MCPeerID!, didChangeState state: MCSessionState)
@@ -65,7 +62,7 @@ class ChalkSession: NSObject, MCSessionDelegate {
     
     func sendData(data: NSData){
         var error : NSError?
-        self.session.sendData(data, toPeers: self.peers, withMode: MCSessionSendDataMode.Unreliable, error: &error)
+        self.session!.sendData(data, toPeers: self.peers, withMode: MCSessionSendDataMode.Unreliable, error: &error)
     }
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
