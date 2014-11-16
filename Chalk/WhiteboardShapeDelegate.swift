@@ -27,7 +27,8 @@ class WhiteboardShapeDelegate: WhiteboardViewDelegate {
     
     func snapshot() -> NSData
     {
-        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(shapes as AnyObject)
+//        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(shapes as AnyObject)
+        let data = NSData()
         return data
     }
 
