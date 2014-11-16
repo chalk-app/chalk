@@ -24,4 +24,11 @@ class WhiteboardShapeDelegate: WhiteboardViewDelegate {
         self.shapes.append(shape)
         whiteboard.setNeedsDisplay()
     }
+    
+    func snapshot() -> NSData
+    {
+        let data : NSData = NSKeyedArchiver.archivedDataWithRootObject(shapes as AnyObject)
+        return data
+    }
+
 }

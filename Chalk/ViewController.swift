@@ -9,12 +9,12 @@
 import UIKit
 import MultipeerConnectivity
 
-class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewControllerDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewControllerDelegate, UITextFieldDelegate, MCNearbyServiceAdvertiserDelegate {
 
     @IBOutlet weak var usernameField: UITextField?
     @IBOutlet weak var whiteboardView: WhiteboardView?
     @IBOutlet weak var spinner: UIActivityIndicatorView?
-    @IBOutlet weak var browserSwitch : UISwitch?
+    @IBOutlet weak var joinButton : UIButton?
     
     var whiteboardViewDelegate = WhiteboardShapeDelegate()
     var session : ChalkSession?
@@ -23,14 +23,79 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     override func viewDidAppear(animated: Bool) {
         usernameField?.becomeFirstResponder()
         self.spinner!.stopAnimating()
-        self.usernameField!.alpha = 1.0
+        self.whiteboardView!.backgroundColor = UIColor.lightGrayColor()
     }
 
     func presentWhiteboard()
     {
-        self.usernameField?.hidden = true
-        self.whiteboardView?.hidden = false;
-        self.whiteboardView?.delegate = self.whiteboardViewDelegate
+        self.spinner!.stopAnimating()
+        self.usernameField?.enabled = false
+        self.whiteboardView!.backgroundColor = UIColor.whiteColor()
+        self.whiteboardView!.userInteractionEnabled = true
+        self.whiteboardView!.delegate = self.whiteboardViewDelegate
+    }
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return false
+    }
+
+    func textFieldDidEndEditing(textField: UITextField)
+    {
+        self.presentWhiteboard()
+        self.session = ChalkSession(delegate: self)
+        self.session!.advertise()
+    }
+    
+    @IBAction func joinWasPressed()
+    {
+        self.whiteboardView!.backgroundColor = UIColor.lightGrayColor()
+        self.whiteboardView!.userInteractionEnabled = false
+        self.spinner!.startAnimating()
+        self.discover()
+    }
+    
+    func advertise()
+    {
+        let advertiser = self.session!.advertise()
+        advertiser.delegate = self;
+    }
+    
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+        
+        let alertController = UIAlertController(title: "Did Receiver Invitation From Peer", message: "\(peerID.displayName)", preferredStyle: .Alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in
+            invitationHandler(false,nil)
+        }
+        alertController.addAction(cancelAction)
+        
+        let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+            let basicSession = self.session!.startSession()
+            invitationHandler(true,basicSession)
+        }
+        alertController.addAction(OKAction)
+        
+        self.presentViewController(alertController, animated: true) { () -> Void in
+            
+        }
+    }
+    
+        
+    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
+    }
+    
+    func discover()
+    {
+        let browserVC = self.session!.discover()
+        browserVC.delegate = self;
+        self.presentViewController(browserVC,
+            animated:true,
+            completion:{()->Void in
+                    browserVC.browser.startBrowsingForPeers()
+        })
     }
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController!)
@@ -42,43 +107,35 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController!)
     {
         browserViewController.dismissViewControllerAnimated(true) { () -> Void in
+            self.presentWhiteboard()
         }
     }
-        
+    
+    func peerDisplayName() -> String{
+        if(self.usernameField!.text.isEmpty){
+            return UIDevice.currentDevice().name
+        }else{
+            return self.usernameField!.text
+        }
+    }
+
     func peerDidConnect(peerID: MCPeerID)
     {
-        
+        let data = self.whiteboardViewDelegate.snapshot()
+        self.session!.sendData(data)
     }
     
     func peerWillDisconnect(peerID: MCPeerID)
     {
-    
+        
     }
     
     func didReceiveData(NSData,from: MCPeerID)
     {
-    }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool
-    {
-        textField.resignFirstResponder()
-        return false
+        //TODO:
+        //Convert back to shapes and initialize/update the whiteboard!!
     }
 
-    func textFieldDidEndEditing(textField: UITextField)
-    {
-        textField.alpha = 0.4
-        self.session = ChalkSession(delegate: self)
-        self.shouldBrowse = !browserSwitch!.on
-        let browser = session!.browse()
-        browser.delegate = self
-        self.spinner!.startAnimating()
-        let advertiser = session!.advertise()
-        if( shouldBrowse){
-            self.presentViewController(browser, animated: true) { () -> Void in
-            }
-        }
-    }
     
 }
 

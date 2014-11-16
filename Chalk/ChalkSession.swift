@@ -12,31 +12,53 @@ import MultipeerConnectivity
 class ChalkSession: NSObject, MCSessionDelegate {
     
     var peers : [MCPeerID]
+    let peerID : MCPeerID
     let delegate: ChalkSessionDelegate
-    let serviceType = "ChalkSession2"
+    let serviceType = "Chalk-join"
     var session : MCSession!
     
     init(delegate: ChalkSessionDelegate)
     {
         self.delegate = delegate
+        var peerName = delegate.peerDisplayName()
+        self.peerID =  MCPeerID(displayName: peerName)
         self.peers = []
         super.init()
     }
 
-    func browse() -> MCBrowserViewController
+    func startSession() -> MCSession
     {
-        let peerID =  MCPeerID(displayName: UIDevice.currentDevice().name )
-        self.session = MCSession(peer: peerID)
-        self.session.delegate = self
-        let browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
-        return browser
+        
+        let discoverySession = MCSession(peer:self.peerID,
+            securityIdentity:nil,
+            encryptionPreference: MCEncryptionPreference.None)
+        
+        discoverySession.delegate = self
+        
+        return discoverySession
+    }
+
+    
+    func discover() -> MCBrowserViewController
+    {
+        
+        let browser = MCNearbyServiceBrowser(peer:self.peerID,serviceType:self.serviceType);
+        
+        self.session = self.startSession()
+        
+        let browserViewController = MCBrowserViewController(browser:browser,
+            session:self.session!)
+        
+        return browserViewController
     }
     
-    func advertise() -> MCAdvertiserAssistant
+    func advertise() -> MCNearbyServiceAdvertiser
     {
-        let advertiser = MCAdvertiserAssistant(serviceType:self.serviceType
-                , discoveryInfo:nil, session: self.session)
-        advertiser.start()
+        let peerID =  MCPeerID(displayName: self.delegate.peerDisplayName() )
+        let advertiser = MCNearbyServiceAdvertiser(peer:self.peerID,
+                discoveryInfo:nil,
+                serviceType:self.serviceType)
+        advertiser.startAdvertisingPeer()
         return advertiser
     }
     

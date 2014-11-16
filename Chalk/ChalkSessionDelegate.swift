@@ -13,4 +13,5 @@ protocol ChalkSessionDelegate {
     func peerDidConnect(peerID: MCPeerID)
     func peerWillDisconnect(peerID: MCPeerID)
     func didReceiveData(NSData,from: MCPeerID)
+    func peerDisplayName() -> String
 }
