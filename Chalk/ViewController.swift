@@ -46,7 +46,7 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     {
         self.presentWhiteboard()
         self.session = ChalkSession(delegate: self)
-        self.session!.advertise()
+        self.advertise()
     }
     
     @IBAction func joinWasPressed()
@@ -85,6 +85,7 @@ class ViewController: UIViewController, ChalkSessionDelegate, MCBrowserViewContr
     
         
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didNotStartAdvertisingPeer error: NSError!) {
+    
     }
     
     func discover()

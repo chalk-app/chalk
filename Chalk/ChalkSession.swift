@@ -54,7 +54,6 @@ class ChalkSession: NSObject, MCSessionDelegate {
     
     func advertise() -> MCNearbyServiceAdvertiser
     {
-        let peerID =  MCPeerID(displayName: self.delegate.peerDisplayName() )
         let advertiser = MCNearbyServiceAdvertiser(peer:self.peerID,
                 discoveryInfo:nil,
                 serviceType:self.serviceType)
